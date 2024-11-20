@@ -54,6 +54,51 @@ function getFolderContent(folderPath, res) {
   });
 }
 
+//delete file
+function deletFile(filePath, res) {
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(404).send("File not found");
+    }
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.log("Error in unlink file", err);
+        return res.status(500).send("Error deleting the file");
+      }
+      res.status(200).send("File deleted successfully");
+    });
+  });
+}
+
+//delete empty folder
+function deletFolder(folderPath, res) {
+  fs.access(folderPath, fs.constants.F_OK, (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(404).send("File not found");
+    }
+    fs.readdir(folderPath, (err, files) => {
+      if (err) {
+        console.log("Error reading folder:", err);
+        return;
+      }
+
+      if (files.length !== 0) {
+        return res.status(404).send("file is not empty. can't delete");
+      } else {
+        fs.rmdir(folderPath, (err) => {
+          if (err) {
+            console.log("Error deleting folder:", err);
+          } else {
+            res.status(200).send("Folder deleted successfully");
+          }
+        });
+      }
+    });
+  });
+}
+
 // show user items
 router.get("/:userName", async (req, res) => {
   const userPath = path.join("./", "users", req.params.userName);
@@ -102,6 +147,33 @@ router.get("/:userName/:folder/:item", async (req, res) => {
 
     getFileContent(nstedFilePath, req, res);
   });
+});
+
+//Delete file or empty folder
+router.delete("/:userName/:item", async (req, res) => {
+  const itemPath = path.join(
+    "./",
+    "users",
+    req.params.userName,
+    req.params.item
+  );
+  fs.stat(itemPath, (err, stats) => {
+    if (err) return res.status(500).send("Error reading folder");
+    stats.isDirectory() ? deletFolder(itemPath, res) : deletFile(itemPath, res);
+  });
+});
+
+//delete file in the folder
+router.delete("/:userName/:folder/:file", async (req, res) => {
+  const filePath = path.join(
+    "./",
+    "users",
+    req.params.userName,
+    req.params.folder,
+    req.params.file
+  );
+
+  deletFile(filePath, res);
 });
 
 module.exports = router;
