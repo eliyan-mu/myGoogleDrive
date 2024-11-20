@@ -16,9 +16,18 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<FolderPage show={curretUser.name} />} />
-          <Route path="/file/:file" element={<FilePage />} />
-          <Route path="/folder/:folder" element={<FolderPage />} />
-          <Route path="/folder/:folder/:file" element={<FilePage />} />
+          <Route
+            path="/file/:file"
+            element={<FilePage name={curretUser.name} />}
+          />
+          <Route
+            path="/folder/:folder"
+            element={<FolderPage name={curretUser.name} />}
+          />
+          <Route
+            path="/folder/:folder/:file"
+            element={<FilePage name={curretUser.name} />}
+          />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
         </Routes>
