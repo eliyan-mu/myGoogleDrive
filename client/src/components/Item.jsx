@@ -1,11 +1,20 @@
 import React from "react";
 import { FaFolder, FaFile } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Item = ({ item }) => {
+  const { folder } = useParams();
+
   return (
     <Link
-      to={item.type === "file" ? `/file/${item.name}` : `/folder/${item.name}`}
+      to={
+        folder
+          ? `/folder/${folder}/file/${item.name}`
+          : item.type === "file"
+          ? `/file/${item.name}`
+          : `/folder/${item.name}`
+      }
       // onClick={() => setFile(item.name)}
     >
       <h2>Name: {item.name}</h2>

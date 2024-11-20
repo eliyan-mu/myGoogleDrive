@@ -2,15 +2,20 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Item from "./Item";
+import { useParams } from "react-router-dom";
 
 const FolderPage = ({ show }) => {
+  const { folder } = useParams();
   const [data, setData] = useState([]);
   console.log("show: ", show);
+  console.log("folder: ", folder);
   const url = "http://localhost:3000/users";
   useEffect(() => {
     async function fetchFolderPge() {
       try {
-        const response = await fetch(`${url}/${show}`);
+        const response = await fetch(
+          folder ? `${url}/${show}/${folder}` : `${url}/${show}`
+        );
         if (!response.ok) throw Error("Did not recive data ");
         const fetchData = await response.json();
         setData(fetchData);
@@ -21,7 +26,7 @@ const FolderPage = ({ show }) => {
       }
     }
     fetchFolderPge();
-  }, []);
+  }, [folder]);
   return (
     <div>
       <h1>folder page</h1>

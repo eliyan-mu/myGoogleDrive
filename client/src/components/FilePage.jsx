@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 const FilePage = ({ name }) => {
   const { file } = useParams();
+  const { folder } = useParams();
   const [data, setData] = useState([]);
 
   const url = "http://localhost:3000/users";
   useEffect(() => {
     async function fetchFile() {
       try {
-        const response = await fetch(`${url}/${name}/${file}`);
+        const response = await fetch(
+          folder ? `${url}/${name}/${folder}/${file}` : `${url}/${name}/${file}`
+        );
         if (!response.ok) throw Error("Did not recive data ");
         const fetchData = await response.text();
         setData(fetchData);

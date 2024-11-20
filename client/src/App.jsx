@@ -22,10 +22,10 @@ function App() {
           />
           <Route
             path="/folder/:folder"
-            element={<FolderPage name={curretUser.name} />}
+            element={<FolderPage show={curretUser.name} />}
           />
           <Route
-            path="/folder/:folder/:file"
+            path="/folder/:folder/file/:file"
             element={<FilePage name={curretUser.name} />}
           />
           <Route path="/register" element={<Register />} />
