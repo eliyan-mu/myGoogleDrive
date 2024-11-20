@@ -42,7 +42,7 @@ function getFolderContent(folderPath, res) {
         if (err) return res.status(500).send("Error reading folder");
         fileDetiles.push({
           name: file,
-          type: stats.isDirectory() ? "directory" : "file",
+          type: stats.isDirectory() ? "folder" : "file",
           size: stats.size,
         });
 
