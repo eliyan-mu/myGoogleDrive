@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const FilePage = () => {
   return (
     <div>
-      
+      <h1>file page </h1>
     </div>
-  )
-}
+  );
+};
 
-export default FilePage
+export default FilePage;
