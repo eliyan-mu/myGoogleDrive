@@ -28,7 +28,7 @@ const FilePage = ({ name, currentUser }) => {
   }, []);
 
   return (
-    <div>
+    <div className="file-wrapper">
       <h2>{file}</h2>
       <h3>{data}</h3>
     </div>

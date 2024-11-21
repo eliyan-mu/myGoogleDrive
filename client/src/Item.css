@@ -12,14 +12,17 @@
 
 .item-link:hover {
   background-color: #f0f0f0;
+  color: #02020c;
+
 }
 
 /* Container for each item (file or folder) */
 .item {
-  display: flex;
+  /* display: flex;
   align-items: center;
+  justify-content: space-evenly; */
   padding: 10px;
-  background-color: #fff;
+  background-color: #f5ddc5;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -59,4 +62,47 @@
   font-size: 0.9rem;
   color: #555;
   margin: 3px 0;
+}
+/* 
+.button-div{
+  display: flex;
+  flex-direction: column;
+} */
+
+.controle-button{
+  margin: 5px;
+  padding: 7px;
+}
+
+.rename-wrapper {
+  width: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.rename-wrapper input {
+  padding: 5px;
+  width: 40%;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: #eccdae;
+}
+
+.rename-wrapper .save {
+  padding: 2.5px 5px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.rename-wrapper .save:hover {
+  border-color: #010216;
 }

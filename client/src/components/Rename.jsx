@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import "../App.css";
+
+
 const Rename = ({ item, user, data, rename, setRename, setData }) => {
   const { folder } = useParams();
   const [newName, setNewName] = useState(item.name);
@@ -46,8 +49,8 @@ const Rename = ({ item, user, data, rename, setRename, setData }) => {
   }
   return (
     <>
-      <div>
-        <label htmlFor="rename">rename:</label>
+      <div className="rename-wrapper">
+        {/* <label htmlFor="rename">rename:</label> */}
         <input
           type="text"
           id="rename"
@@ -58,7 +61,7 @@ const Rename = ({ item, user, data, rename, setRename, setData }) => {
           }}
           onClick={(e) => e.preventDefault()}
         />
-        <button onClick={handleRename}> save</button>
+        <button className="save" onClick={handleRename}> save</button>
       </div>
     </>
   );

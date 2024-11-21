@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
+import "../App.css";
 
 function Login({ setCurrentUser }) {
   const [name, setName] = useState("");
@@ -41,8 +42,7 @@ function Login({ setCurrentUser }) {
     <div className="login-wrapper">
       <h1>Please Log In</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name"> Name </label>
-        <br />
+        <label htmlFor="name"> Name: </label>
         <br />
         <input
           id="name"
@@ -52,8 +52,7 @@ function Login({ setCurrentUser }) {
         />
         <br />
         <br />
-        <label htmlFor="password"> Password </label>
-        <br />
+        <label htmlFor="password"> Password: </label>
         <br />
         <input
           id="password"
@@ -61,12 +60,15 @@ function Login({ setCurrentUser }) {
           type="password"
           onChange={(e) => setPassword(e.target.value)}
         />
+        <br />
+        <br />
 
         <div>
           <NavLink to="Register">
             Don't have an account? Create one here!
           </NavLink>
-          <br />
+        <br />
+        <br />
           <button type="submit">Submit</button>
         </div>
       </form>

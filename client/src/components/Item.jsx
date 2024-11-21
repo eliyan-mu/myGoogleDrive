@@ -72,8 +72,13 @@ const Item = ({ item, user, setData, data }) => {
           )}
           <h3 className="item-type">Type: {item.type}</h3>
           <h4 className="item-size">Size: {item.size}</h4>
-          <button onClick={handleDelete}>delete</button>
+        </div>
+        <div className="button-div">
+          <button className="controle-button" onClick={handleDelete}>
+            delete
+          </button>
           <button
+            className="controle-button"
             onClick={(e) => {
               e.preventDefault();
               setRename(!rename);

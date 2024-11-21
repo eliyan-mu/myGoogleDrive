@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../App.css";
+import "../Item.css";
 
 const Register = ({ setCurrentUser }) => {
   const [name, setName] = useState("");
@@ -44,7 +46,7 @@ const Register = ({ setCurrentUser }) => {
   };
   return (
     <div className="login-wrapper">
-      <h1>Register</h1>
+      <h1>Please Register</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name"> Name </label>
         <br />
