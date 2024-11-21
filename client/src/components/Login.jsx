@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 
-function Login({ currentUser, setCurrentUser }) {
+function Login({ setCurrentUser }) {
   const [name, setName] = useState("");
-  const [password, setpassword] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const url = "http://localhost:3000";
 
@@ -41,23 +41,27 @@ function Login({ currentUser, setCurrentUser }) {
     <div className="login-wrapper">
       <h1>Please Log In</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          <p>Name</p>
-          <input
-            placeholder="Name"
-            type="text"
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
+        <label htmlFor="name"> Name </label>
+        <br />
+        <br />
+        <input
+          id="name"
+          placeholder="Name"
+          type="text"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <br />
+        <br />
+        <label htmlFor="password"> Password </label>
+        <br />
+        <br />
+        <input
+          id="password"
+          placeholder="Password"
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-        <label>
-          <p>Password</p>
-          <input
-            placeholder="Password"
-            type="password"
-            onChange={(e) => setpassword(e.target.value)}
-          />
-        </label>
         <div>
           <NavLink to="Register">
             Don't have an account? Create one here!

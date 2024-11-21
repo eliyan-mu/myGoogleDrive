@@ -3,7 +3,7 @@ import { FaFolder, FaFile } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import Rename from "./Rename";
-import "../Item.css"; // Import the CSS file
+import "../Item.css";
 
 const Item = ({ item, user, setData, data }) => {
   const [rename, setRename] = useState(false);

@@ -26,7 +26,10 @@ function App() {
             path="/folder/:folder/file/:file"
             element={<FilePage name={currentUser.name} />}
           />
-          <Route path="/register" element={<Register />} />
+          <Route
+            path="/register"
+            element={<Register setCurrentUser={setCurrentUser} />}
+          />
           <Route
             path="/login"
             element={<Login setCurrentUser={setCurrentUser} />}
