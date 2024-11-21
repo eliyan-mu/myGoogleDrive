@@ -13,18 +13,29 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<FolderPage user={currentUser.name} />} />
+          <Route
+            path="/"
+            element={
+              <FolderPage user={currentUser.name} currentUser={currentUser} />
+            }
+          />
           <Route
             path="/file/:file"
-            element={<FilePage name={currentUser.name} />}
+            element={
+              <FilePage name={currentUser.name} currentUser={currentUser} />
+            }
           />
           <Route
             path="/folder/:folder"
-            element={<FolderPage user={currentUser.name} />}
+            element={
+              <FolderPage user={currentUser.name} currentUser={currentUser} />
+            }
           />
           <Route
             path="/folder/:folder/file/:file"
-            element={<FilePage name={currentUser.name} />}
+            element={
+              <FilePage name={currentUser.name} currentUser={currentUser} />
+            }
           />
           <Route
             path="/register"

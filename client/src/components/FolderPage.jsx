@@ -1,18 +1,21 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Item from "./Item";
 import { useParams } from "react-router-dom";
 
-const FolderPage = ({ user }) => {
+const FolderPage = ({ user, currentUser }) => {
   const { folder } = useParams();
   const [data, setData] = useState([]);
+  const navigate = useNavigate() 
   console.log("user: ", user);
   console.log("folder: ", folder);
   const url = "http://localhost:3000/users";
+
   useEffect(() => {
     async function fetchFolderPge() {
       try {
+        if (currentUser && user){
         const response = await fetch(
           folder ? `${url}/${user}/${folder}` : `${url}/${user}`
         );
@@ -21,6 +24,7 @@ const FolderPage = ({ user }) => {
         setData(fetchData);
         console.log(data);
         return data;
+      }else{navigate('/login')}
       } catch (err) {
         alert(err, "you have an error");
       }
