@@ -1,11 +1,12 @@
-import React from "react";
-// import { FaFolder, FaFile } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaFolder, FaFile } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import Rename from "./Rename";
 import "../Item.css"; // Import the CSS file
 
 const Item = ({ item, user, setData, data }) => {
-  console.log("data1: ", data);
+  const [rename, setRename] = useState(false);
   const { folder } = useParams();
   const url = "http://localhost:3000/users";
   const handleDelete = async (e) => {
@@ -29,7 +30,6 @@ const Item = ({ item, user, setData, data }) => {
         return;
       }
       alert("deleted sucssefully");
-      console.log("data: ", data);
       const updatedData = data.filter(
         (dataItem) => dataItem.name !== item.name
       );
@@ -58,10 +58,29 @@ const Item = ({ item, user, setData, data }) => {
           <FaFile className="item-icon file-icon" />
         )}
         <div className="item-info">
-          <h2 className="item-name">{item.name}</h2>
+          {rename ? (
+            <Rename
+              item={item}
+              user={user}
+              rename={rename}
+              setRename={setRename}
+              data={data}
+              setData={setData}
+            />
+          ) : (
+            <h2 className="item-name">{item.name}</h2>
+          )}
           <h3 className="item-type">Type: {item.type}</h3>
           <h4 className="item-size">Size: {item.size}</h4>
           <button onClick={handleDelete}>delete</button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              setRename(!rename);
+            }}
+          >
+            rename
+          </button>
         </div>
       </div>
     </Link>

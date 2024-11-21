@@ -62,6 +62,7 @@ function Login({ currentUser, setCurrentUser }) {
           <NavLink to="Register">
             Don't have an account? Create one here!
           </NavLink>
+          <br />
           <button type="submit">Submit</button>
         </div>
       </form>
