@@ -6,30 +6,31 @@ import FilePage from "./components/FilePage";
 import FolderPage from "./components/FolderPage";
 import Register from "./components/Register";
 function App() {
-  const curretUser = {
-    name: "eliyan",
-  };
+  const [currentUser, setCurrentUser] = useState({});
 
-  console.log("curretUser.name: ", curretUser.name);
+  // console.log("curretUser.name: ", currentUser.name);
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<FolderPage show={curretUser.name} />} />
+          <Route path="/" element={<FolderPage user={currentUser.name} />} />
           <Route
             path="/file/:file"
-            element={<FilePage name={curretUser.name} />}
+            element={<FilePage name={currentUser.name} />}
           />
           <Route
             path="/folder/:folder"
-            element={<FolderPage show={curretUser.name} />}
+            element={<FolderPage user={currentUser.name} />}
           />
           <Route
             path="/folder/:folder/file/:file"
-            element={<FilePage name={curretUser.name} />}
+            element={<FilePage name={currentUser.name} />}
           />
           <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={<Login setCurrentUser={setCurrentUser} />}
+          />
         </Routes>
       </Router>
     </>

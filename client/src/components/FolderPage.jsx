@@ -4,17 +4,17 @@ import { Link } from "react-router-dom";
 import Item from "./Item";
 import { useParams } from "react-router-dom";
 
-const FolderPage = ({ show }) => {
+const FolderPage = ({ user }) => {
   const { folder } = useParams();
   const [data, setData] = useState([]);
-  console.log("show: ", show);
+  console.log("user: ", user);
   console.log("folder: ", folder);
   const url = "http://localhost:3000/users";
   useEffect(() => {
     async function fetchFolderPge() {
       try {
         const response = await fetch(
-          folder ? `${url}/${show}/${folder}` : `${url}/${show}`
+          folder ? `${url}/${user}/${folder}` : `${url}/${user}`
         );
         if (!response.ok) throw Error("Did not recive data ");
         const fetchData = await response.json();
@@ -22,7 +22,7 @@ const FolderPage = ({ show }) => {
         console.log(data);
         return data;
       } catch (err) {
-        console.log(err, "you have an error");
+        alert(err, "you have an error");
       }
     }
     fetchFolderPge();
