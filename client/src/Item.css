@@ -1,0 +1,62 @@
+/* Style for the Link component */
+.item-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.item-link:hover {
+  background-color: #f0f0f0;
+}
+
+/* Container for each item (file or folder) */
+.item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+/* Style for folder and file icons */
+.item-icon {
+  font-size: 2rem;
+  margin-right: 15px;
+}
+
+/* Specific style for folder icon */
+.folder-icon {
+  color: #f4a261; /* Orange color for folders */
+}
+
+/* Specific style for file icon */
+.file-icon {
+  color: #2a9d8f; /* Teal color for files */
+}
+
+/* Style for item info (name, type, size) */
+.item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.item-type,
+.item-size {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 3px 0;
+}

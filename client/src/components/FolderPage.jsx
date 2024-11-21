@@ -31,7 +31,15 @@ const FolderPage = ({ user }) => {
     <div>
       <h1>folder page</h1>
       {data.length > 0 ? (
-        data.map((item) => <Item key={item.name} item={item} />)
+        data.map((item) => (
+          <Item
+            key={item.name}
+            item={item}
+            user={user}
+            setData={setData}
+            data={data}
+          />
+        ))
       ) : (
         <p>No items found.</p>
       )}
