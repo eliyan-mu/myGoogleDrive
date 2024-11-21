@@ -26,7 +26,6 @@ const FilePage = ({ name }) => {
 
   return (
     <div>
-      <h1>File Page</h1>
       <h2>{file}</h2>
       <h3>{data}</h3>
     </div>

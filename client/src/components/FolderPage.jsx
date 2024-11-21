@@ -29,7 +29,6 @@ const FolderPage = ({ user }) => {
   }, [folder]);
   return (
     <div>
-      <h1>folder page</h1>
       {data.length > 0 ? (
         data.map((item) => (
           <Item

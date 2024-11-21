@@ -2,102 +2,11 @@ var express = require("express");
 var router = express.Router();
 const path = require("path");
 const fs = require("fs");
-
-// read file
-function getFileContent(filePath, req, res) {
-  console.log("filePath: ", filePath);
-  const options = {
-    root: filePath,
-  };
-  try {
-    fs.access(filePath, fs.constants.F_OK, (err) => {
-      if (err) {
-        console.log(err);
-        return res.status(404).send("User folder not found");
-      }
-      console.log("req.params.item: ", req.params.item);
-      res.sendFile(req.params.item, options, (err) => {
-        if (err) {
-          console.log(err);
-          return res.status(404).send("User folder not found");
-        }
-      });
-    });
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-// read folder
-function getFolderContent(folderPath, res) {
-  fs.readdir(folderPath, (err, files) => {
-    if (err) return res.status(500).send("Error reading folder");
-
-    const fileDetiles = [];
-
-    files.forEach((file) => {
-      const filePath = path.join(folderPath, file);
-
-      fs.stat(filePath, (err, stats) => {
-        if (err) return res.status(500).send("Error reading folder");
-        fileDetiles.push({
-          name: file,
-          type: stats.isDirectory() ? "folder" : "file",
-          size: stats.size,
-        });
-
-        if (fileDetiles.length === files.length) {
-          res.json(fileDetiles);
-        }
-      });
-    });
-  });
-}
-
-//delete file
-function deletFile(filePath, res) {
-  fs.access(filePath, fs.constants.F_OK, (err) => {
-    if (err) {
-      console.log(err);
-      return res.status(404).send("File not found");
-    }
-    fs.unlink(filePath, (err) => {
-      if (err) {
-        console.log("Error in unlink file", err);
-        return res.status(500).send("Error deleting the file");
-      }
-      res.status(200).send("File deleted successfully");
-    });
-  });
-}
-
-//delete empty folder
-function deletFolder(folderPath, res) {
-  fs.access(folderPath, fs.constants.F_OK, (err) => {
-    if (err) {
-      console.log(err);
-      return res.status(404).send("File not found");
-    }
-    fs.readdir(folderPath, (err, files) => {
-      if (err) {
-        console.log("Error reading folder:", err);
-        return;
-      }
-
-      if (files.length !== 0) {
-        return res.status(404).send("file is not empty. can't delete");
-      } else {
-        fs.rmdir(folderPath, (err) => {
-          if (err) {
-            console.log("Error deleting folder:", err);
-          } else {
-            res.status(200).send("Folder deleted successfully");
-          }
-        });
-      }
-    });
-  });
-}
+const getFileContent = require("../controllers/getFileContent");
+const getFolderContent = require("../controllers/getFolderContent");
+const deleteFile = require("../controllers/deleteFile");
+const deleteFolder = require("../controllers/deleteFolder");
+const rename = require("../controllers/rename");
 
 // show user items
 router.get("/:userName", async (req, res) => {
@@ -159,7 +68,9 @@ router.delete("/:userName/:item", async (req, res) => {
   );
   fs.stat(itemPath, (err, stats) => {
     if (err) return res.status(500).send("Error reading folder");
-    stats.isDirectory() ? deletFolder(itemPath, res) : deletFile(itemPath, res);
+    stats.isDirectory()
+      ? deleteFolder(itemPath, res)
+      : deleteFile(itemPath, res);
   });
 });
 
@@ -173,7 +84,32 @@ router.delete("/:userName/:folder/:file", async (req, res) => {
     req.params.file
   );
 
-  deletFile(filePath, res);
+  deleteFile(filePath, res);
+});
+
+//Rename file in folder
+router.put("/:userName/:folder/:file", async (req, res) => {
+  const filePath = path.join(
+    "./",
+    "users",
+    req.params.userName,
+    req.params.folder,
+    req.params.file
+  );
+  rename(filePath, req, res);
+});
+
+//rename
+router.put("/:userName/:item", async (req, res) => {
+  console.log("userName: ");
+  const filePath = path.join(
+    "./",
+    "users",
+    req.params.userName,
+    req.params.item
+  );
+  console.log("filePath: ", filePath);
+  rename(filePath, req, res);
 });
 
 module.exports = router;
