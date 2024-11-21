@@ -32,21 +32,21 @@ const FolderPage = ({ user, currentUser }) => {
     fetchFolderPge();
   }, [folder]);
   return (
-    <div>
-      {data.length > 0 ? (
-        data.map((item) => (
-          <Item
-            key={item.name}
-            item={item}
-            user={user}
-            setData={setData}
-            data={data}
-          />
-        ))
-      ) : (
-        <p>No items found.</p>
-      )}
-    </div>
+    <div className="item-container">
+    {data.length > 0 ? (
+      data.map((item) => (
+        <Item
+          key={item.name}
+          item={item}
+          user={user}
+          setData={setData}
+          data={data}
+        />
+      ))
+    ) : (
+      <p>No items found.</p>
+    )}
+  </div>
   );
 };
 

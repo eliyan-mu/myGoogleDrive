@@ -1,4 +1,33 @@
 /* Style for the Link component */
+
+/* Style for the container that holds all the items */
+.item-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next row */
+  gap: 20px;  /* Space between the items */
+  padding: 20px;
+}
+
+/* Style for each item */
+.item {
+  width: calc(33.33% - 20px); /* 3 items per row with space between them */
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+/* Make sure the item container takes up full width on small screens */
+@media (max-width: 768px) {
+  .item {
+    width: calc(50% - 20px); /* 2 items per row on medium screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .item {
+    width: 100%; /* 1 item per row on small screens */
+  }
+}
+
 .item-link {
   text-decoration: none;
   color: inherit;
