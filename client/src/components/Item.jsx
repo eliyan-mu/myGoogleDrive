@@ -1,5 +1,5 @@
 import React from "react";
-import { FaFolder, FaFile } from "react-icons/fa";
+// import { FaFolder, FaFile } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
